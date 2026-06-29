@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ToastContainer position="top-right" autoClose={4000} theme="light" />
       </body>
     </html>
   );

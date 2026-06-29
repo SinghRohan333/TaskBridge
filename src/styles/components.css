@@ -92,3 +92,14 @@
 .social-icon:hover {
   color: var(--color-blue-light);
 }
+
+/* Toastify — themed to TaskBridge palette */
+:root {
+  --toastify-color-light: #ffffff;
+  --toastify-color-success: #0e9f6e;
+  --toastify-color-error: #ef4444;
+  --toastify-color-warning: #f59e0b;
+  --toastify-color-info: #1a56db;
+  --toastify-text-color-light: #1f2937;
+  --toastify-toast-bd-radius: 10px;
+}

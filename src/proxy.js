@@ -17,10 +17,9 @@ export async function proxy(request) {
     }
     return NextResponse.next();
   }
-}
 
-// Alternatively, you can use a default export:
-// export default function proxy(request) { ... }
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: ["/login", "/register"],

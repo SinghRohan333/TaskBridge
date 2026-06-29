@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Bars, Xmark } from "@gravity-ui/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const publicLinks = [
   { label: "Home", href: "/" },
@@ -13,18 +15,38 @@ const publicLinks = [
   { label: "Browse Freelancers", href: "/browse-freelancers" },
 ];
 
-const privateLinks = [
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Profile", href: "/profile" },
-];
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  // ...inside component:
+  const { data: session } = authClient.useSession();
+  const isLoggedIn = !!session?.user;
+  const role = session?.user?.role || "client";
 
-  // Mock auth state — replaced with real auth in Step 2.1
-  const isLoggedIn = false;
+  const dashboardHref =
+    role === "freelancer"
+      ? "/dashboard/freelancer"
+      : role === "admin"
+        ? "/dashboard/admin"
+        : "/dashboard/client";
+
+  const privateLinks = [
+    { label: "Dashboard", href: dashboardHref },
+    { label: "Profile", href: "/profile" },
+  ];
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("You have been logged out");
+          router.push("/");
+        },
+      },
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 8);
@@ -79,7 +101,10 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-4">
           {isLoggedIn ? (
-            <button className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors">
+            <button
+              className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           ) : (
@@ -165,7 +190,10 @@ export default function Navbar() {
 
               <div className="mt-auto">
                 {isLoggedIn ? (
-                  <button className="w-full text-sm font-medium text-[var(--color-text-secondary)]">
+                  <button
+                    className="w-full text-sm font-medium text-[var(--color-text-secondary)]"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
                 ) : (
