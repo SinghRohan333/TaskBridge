@@ -1,0 +1,94 @@
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.navbar-scrolled {
+  border-bottom-color: #e5e7eb;
+  box-shadow: 0 4px 20px -10px rgba(17, 24, 39, 0.15);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-text-primary);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-brand-blue);
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Mobile drawer */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 24, 39, 0.5);
+  z-index: 60;
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(80vw, 320px);
+  background-color: var(--color-bg);
+  border-left: 1px solid #e5e7eb;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Footer — dark section, per design system's secondary dark bg */
+.footer {
+  background-color: var(--color-bg-dark);
+  border-top: 1px solid #1f2937;
+}
+
+.footer-text {
+  color: #9ca3af;
+}
+
+.footer-link {
+  color: #d1d5db;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.social-icon {
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+
+.social-icon:hover {
+  color: var(--color-blue-light);
+}
