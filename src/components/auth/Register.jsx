@@ -62,7 +62,7 @@ export default function Register() {
           if (form.role === "freelancer") {
             router.push("/dashboard/freelancer");
           } else {
-            router.push("/");
+            router.push("/dashboard/client");
           }
         },
         onError: (ctx) => {

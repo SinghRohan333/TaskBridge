@@ -9,7 +9,7 @@ import { authClient } from "@/lib/auth-client";
 import { validateEmail } from "@/lib/validators";
 
 const roleRedirects = {
-  client: "/",
+  client: "/dashboard/client",
   freelancer: "/dashboard/freelancer",
   admin: "/dashboard/admin",
 };
