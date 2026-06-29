@@ -19,12 +19,43 @@ export const auth = betterAuth({
     client,
   }),
   user: {
+    modelName: "users",
     additionalFields: {
       role: {
         type: "string",
         required: false,
         defaultValue: "client",
-        input: true, // allows the client to set this on signUp.email
+        input: true,
+      },
+      skills: {
+        type: "string[]",
+        required: false,
+        defaultValue: [],
+        input: false,
+      },
+      bio: {
+        type: "string",
+        required: false,
+        defaultValue: "",
+        input: false,
+      },
+      hourlyRate: {
+        type: "number",
+        required: false,
+        defaultValue: 0,
+        input: false,
+      },
+      isBlocked: {
+        type: "boolean",
+        required: false,
+        defaultValue: false,
+        input: false,
+      },
+      isVerified: {
+        type: "boolean",
+        required: false,
+        defaultValue: false,
+        input: false,
       },
     },
   },
@@ -32,8 +63,6 @@ export const auth = betterAuth({
     user: {
       create: {
         before: async (user, ctx) => {
-          // Force Client role for anyone arriving via Google OAuth,
-          // regardless of what (if anything) was passed in.
           const isGoogleSignUp =
             ctx?.context?.provider === "google" || ctx?.provider === "google";
           if (isGoogleSignUp) {

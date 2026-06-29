@@ -42,7 +42,7 @@ export default function Navbar() {
       fetchOptions: {
         onSuccess: () => {
           toast.success("You have been logged out");
-          router.push("/");
+          router.push("/login");
         },
       },
     });
