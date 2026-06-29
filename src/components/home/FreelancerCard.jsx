@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import StarRating from "@/components/ui/StarRating";
+import VerifiedBadge from "@/components/ui/VerifiedBadge";
 
 function getInitials(name = "") {
   return name
@@ -19,7 +20,7 @@ export default function FreelancerCard({ freelancer }) {
 
   return (
     <Link
-      href={`/browse-freelancers/${freelancer._id}`}
+      href={`/freelancers/${freelancer._id}`}
       className="block bg-white border border-[#e5e7eb] rounded-xl p-5 hover:shadow-md hover:-translate-y-0.5 transition-all text-center"
     >
       {showImage ? (
@@ -35,9 +36,12 @@ export default function FreelancerCard({ freelancer }) {
         </div>
       )}
 
-      <h3 className="text-h3 text-[var(--color-text-primary)] mb-1">
-        {freelancer.name}
-      </h3>
+      <div className="flex items-center justify-center gap-1.5 mb-1">
+        <h3 className="text-h3 text-[var(--color-text-primary)]">
+          {freelancer.name}
+        </h3>
+        {freelancer.isVerified && <VerifiedBadge size={16} />}
+      </div>
 
       <div className="flex justify-center mb-2">
         <StarRating rating={freelancer.averageRating || 0} size={14} />
