@@ -9,6 +9,7 @@ import Logo from "./Logo";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import NotificationBell from "./NotificationBell";
+import { clearAuthToken } from "@/lib/auth-token";
 
 const publicLinks = [
   { label: "Home", href: "/" },
@@ -33,17 +34,24 @@ export default function Navbar() {
         ? "/dashboard/admin"
         : "/dashboard/client";
 
+  const profileHref =
+    role === "admin"
+      ? "/dashboard/admin/profile"
+      : role === "freelancer"
+        ? "/dashboard/freelancer/profile"
+        : "/dashboard/client/profile";
+
   const privateLinks = [
     { label: "Dashboard", href: dashboardHref },
-    { label: "Profile", href: "/profile" },
+    { label: "Profile", href: profileHref },
   ];
 
   const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          toast.success("You have been logged out");
-          router.push("/login");
+          clearAuthToken();
+          router.push("/");
         },
       },
     });

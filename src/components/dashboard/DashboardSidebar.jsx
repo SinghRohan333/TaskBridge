@@ -15,6 +15,7 @@ const navLinks = {
     { label: "My Tasks", href: "/dashboard/client/my-tasks" },
     { label: "My Proposals", href: "/dashboard/client/proposals" },
     { label: "Payment History", href: "/dashboard/client/payments" },
+    { label: "Edit Profile", href: "/dashboard/client/profile" },
   ],
   freelancer: [
     { label: "Overview", href: "/dashboard/freelancer" },
@@ -30,6 +31,7 @@ const navLinks = {
     { label: "Manage Users", href: "/dashboard/admin/users" },
     { label: "Manage Tasks", href: "/dashboard/admin/tasks" },
     { label: "Manage Payments", href: "/dashboard/admin/payments" },
+    { label: "Edit Profile", href: "/dashboard/admin/profile" },
   ],
 };
 
