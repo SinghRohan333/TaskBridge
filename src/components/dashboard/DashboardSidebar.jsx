@@ -51,7 +51,7 @@ export default function DashboardSidebar({ onClose }) {
       fetchOptions: {
         onSuccess: () => {
           clearAuthToken();
-          router.push("/");
+          window.location.href = "/login";
         },
       },
     });

@@ -51,7 +51,7 @@ export default function Navbar() {
       fetchOptions: {
         onSuccess: () => {
           clearAuthToken();
-          router.push("/");
+          window.location.href = "/login";
         },
       },
     });
