@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Logo from "./Logo";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import NotificationBell from "./NotificationBell";
 
 const publicLinks = [
   { label: "Home", href: "/" },
@@ -100,6 +101,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
+          {isLoggedIn && <NotificationBell />}
           {isLoggedIn ? (
             <button
               className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"

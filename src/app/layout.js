@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { BookmarksProvider } from "@/context/BookmarksContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-full flex flex-col antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <BookmarksProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </BookmarksProvider>
         <ToastContainer position="top-right" autoClose={4000} theme="light" />
       </body>
     </html>

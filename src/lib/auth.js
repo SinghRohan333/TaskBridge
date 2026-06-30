@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { MongoClient, ObjectId } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { jwt } from "better-auth/plugins";
 import { APIError } from "better-auth/api";
 
 const client = new MongoClient(process.env.MONGODB_URI);
@@ -19,6 +20,17 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client,
   }),
+  plugins: [
+    jwt({
+      jwt: {
+        expirationTime: "7d",
+        definePayload: ({ user }) => ({
+          email: user.email,
+          role: user.role,
+        }),
+      },
+    }),
+  ],
   user: {
     modelName: "users",
     additionalFields: {
@@ -56,6 +68,12 @@ export const auth = betterAuth({
         type: "boolean",
         required: false,
         defaultValue: false,
+        input: false,
+      },
+      bookmarks: {
+        type: "string[]",
+        required: false,
+        defaultValue: [],
         input: false,
       },
     },

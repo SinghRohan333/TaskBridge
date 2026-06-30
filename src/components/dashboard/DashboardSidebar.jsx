@@ -6,6 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import { getInitials } from "@/lib/utils";
 import VerifiedBadge from "@/components/ui/VerifiedBadge";
 import { Xmark } from "@gravity-ui/icons";
+import { clearAuthToken } from "@/lib/auth-token";
 
 const navLinks = {
   client: [
@@ -22,6 +23,7 @@ const navLinks = {
     { label: "Active Projects", href: "/dashboard/freelancer/projects" },
     { label: "Earnings", href: "/dashboard/freelancer/earnings" },
     { label: "Edit Profile", href: "/dashboard/freelancer/profile" },
+    { label: "Bookmarked Tasks", href: "/dashboard/freelancer/bookmarks" },
   ],
   admin: [
     { label: "Overview", href: "/dashboard/admin" },
@@ -45,7 +47,10 @@ export default function DashboardSidebar({ onClose }) {
   const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
-        onSuccess: () => router.push("/"),
+        onSuccess: () => {
+          clearAuthToken();
+          router.push("/");
+        },
       },
     });
   };
