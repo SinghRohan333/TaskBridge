@@ -1,3 +1,4 @@
+import AdminStatsRow from "@/components/dashboard/admin/AdminStatsRow";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
 export const metadata = {
@@ -10,9 +11,10 @@ export default function AdminDashboardPage() {
       <h1 className="text-h1 text-[var(--color-text-primary)] mb-2">
         Welcome back
       </h1>
-      <p className="text-body text-[var(--color-text-secondary)]">
-        Your admin dashboard overview is coming in the next step.
+      <p className="text-body text-[var(--color-text-secondary)] mb-6">
+        Here&apos;s what&apos;s happening across TaskBridge today.
       </p>
+      <AdminStatsRow />
     </DashboardLayout>
   );
 }

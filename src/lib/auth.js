@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { APIError } from "better-auth/api";
 
 const client = new MongoClient(process.env.MONGODB_URI);
 const db = client.db("taskbridge-db");
@@ -69,6 +70,23 @@ export const auth = betterAuth({
             return { data: { ...user, role: "client" } };
           }
           return { data: user };
+        },
+      },
+    },
+    session: {
+      create: {
+        before: async (session) => {
+          const sessionUser = await db
+            .collection("users")
+            .findOne({ _id: new ObjectId(session.userId) });
+
+          if (sessionUser?.isBlocked) {
+            throw new APIError("FORBIDDEN", {
+              message: "Account suspended.",
+            });
+          }
+
+          return { data: session };
         },
       },
     },
