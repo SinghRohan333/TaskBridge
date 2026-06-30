@@ -19,7 +19,9 @@ const navLinks = {
     { label: "Overview", href: "/dashboard/freelancer" },
     { label: "Browse Tasks", href: "/browse-tasks" },
     { label: "My Proposals", href: "/dashboard/freelancer/proposals" },
+    { label: "Active Projects", href: "/dashboard/freelancer/projects" },
     { label: "Earnings", href: "/dashboard/freelancer/earnings" },
+    { label: "Edit Profile", href: "/dashboard/freelancer/profile" },
   ],
   admin: [
     { label: "Overview", href: "/dashboard/admin" },
